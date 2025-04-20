@@ -1,4 +1,6 @@
 import Cocoa
+import KeyboardShortcuts
+import SwiftUI
 
 // Create the application instance
 let app = NSApplication.shared
@@ -46,6 +48,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             alert.addButton(withTitle: "OK")
             alert.runModal()
         }
+        
+        // Register keyboard shortcuts
+        KeyboardShortcuts.onKeyUp(for: .toggleRecording) {
+            FloatingInputWindowManager.shared.show()
+        }
+        KeyboardShortcuts.onKeyUp(for: .cancelRecording) {
+            FloatingInputWindowManager.shared.hide()
+        }
+        KeyboardShortcuts.onKeyUp(for: .changeMode) {
+            print("Change mode shortcut triggered")
+        }
+        
+        // Set default shortcuts
+        KeyboardShortcuts.setShortcut(.toggleRecording, to: KeyboardShortcuts.Shortcut(.space, modifiers: [.command, .shift]))
+        KeyboardShortcuts.setShortcut(.cancelRecording, to: KeyboardShortcuts.Shortcut(.escape))
+        KeyboardShortcuts.setShortcut(.changeMode, to: KeyboardShortcuts.Shortcut(.k, modifiers: [.command, .shift]))
     }
     
     @objc func addNote(_ sender: Any?) {
@@ -65,11 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openSettings(_ sender: Any?) {
-        let alert = NSAlert()
-        alert.messageText = "Settings"
-        alert.informativeText = "This feature will be implemented soon."
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
+        SettingsWindowManager.shared.show()
     }
     
     @objc func checkForUpdates(_ sender: Any?) {
