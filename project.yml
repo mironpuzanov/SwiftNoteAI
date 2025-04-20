@@ -11,6 +11,10 @@ configs:
   Release:
     name: Release
 
+packages:
+  - url: "https://github.com/sindresorhus/KeyboardShortcuts.git"
+    from: "2.0.0"
+
 targets:
   SwiftNoteAI:
     type: application
@@ -23,5 +27,8 @@ targets:
       - Sources
     resources:
       - Resources
+    dependencies:
+      - package: KeyboardShortcuts
+        product: KeyboardShortcuts
 
  
