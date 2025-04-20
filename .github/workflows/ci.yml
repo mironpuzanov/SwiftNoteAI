@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          brew install swiftlint
+      - name: Lint with SwiftLint
+        run: swiftlint
+      - name: Build and Test
+        run: xcodebuild -scheme SwiftNoteAI -destination 'platform=macOS' test 
