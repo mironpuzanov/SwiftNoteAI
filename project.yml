@@ -1,0 +1,27 @@
+name: SwiftNoteAI
+options:
+  bundleIdPrefix: com.mironpuzanov
+settings:
+  base:
+    SwiftVersion: 5.8
+    INFOPLIST_FILE: Resources/Info.plist
+configs:
+  Debug:
+    name: Debug
+  Release:
+    name: Release
+
+targets:
+  SwiftNoteAI:
+    type: application
+    platform: macOS
+    deploymentTarget: "12.0"
+    settings:
+      base:
+        LSUIElement: "1"
+    sources:
+      - Sources
+    resources:
+      - Resources
+
+ 
